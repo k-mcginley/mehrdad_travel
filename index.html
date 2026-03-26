@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MEHRDAD'S TRAVEL COMPANY — Book Package Holidays</title>
+
+  <!-- Retro / dotcom fonts: using two Google fonts to mimic late-90s/early-2000s feel -->
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Verdana:wght@400;700&display=swap" rel="stylesheet">
+ 
+  <link href="style.css" rel="stylesheet" />
+</head>
+<body>
+  <div class="wrap" role="document">
+    <header>
+      <div class="logo">
+        <div class="logo-box" aria-hidden="true">✈️</div>
+        <div class="logo-text">
+          <h1>MEHRDAD'S TRAVEL CO.</h1>
+          <p>Package Holidays & Mehrcoins</p>
+        </div>
+      </div>
+
+      <div class="top-actions" aria-hidden="false">
+        <div class="badge">VERIFIED</div>
+        <div style="text-align:right;">
+          <div style="font-weight:800;color:#2b1200;">Member since: 1998</div>
+          <div style="font-size:12px;color:#4b382b;">v0.99 beta</div>
+        </div>
+      </div>
+    </header>
+
+    <div class="grid">
+      <div>
+        <section class="hero" aria-label="Search destination">
+          
+          <div class="search-row">
+            <input id="dest" class="search-input" type="text" placeholder="where will our aeroplane take you next?" />
+            <button class="search-cta" type="button">GO</button>
+          </div>
+          <div style="margin-top:8px;font-size:12px;color:#5b4b3b;font-weight:800;">
+            Try: Ashgabat, Turkmenbashi, The Caspian, Secret Resort 2001
+          </div>
+        </section>
+
+        <section class="card" aria-labelledby="booking-title">
+          <h2 id="booking-title">BOOK A PACKAGE HOLIDAY</h2>
+
+          <form class="booking" aria-disabled="true" tabindex="-1">
+            <div class="form-row">
+              <div class="form-col">
+                <label class="field" for="trip">Select trip:</label>
+                <select id="trip" disabled>
+                  <option>Use searchbar above to load options!</option>
+                  
+                </select>
+              </div>  
+            </div>
+            <div class="form-row">
+              <div class="form-col">
+                <label class="field" for="cust-name">Customer name</label>
+                <input id="cust-name" type="text" placeholder="Full name" disabled />
+              </div>
+              <div style="width:160px;">
+                <label class="field" for="cust-tel">Telephone</label>
+                <input id="cust-tel" type="tel" placeholder="+44 7..." disabled />
+              </div>
+            </div>
+
+            <div class="guest-section">
+              <label class="field" for="guest1">Enter guest 1 name</label>
+              <input id="guest1" type="text" placeholder="Guest #1" disabled />
+
+              <div style="margin-top:10px;">
+                <div class="field" style="margin-bottom:6px;">Select guest 1 food allergies</div>
+                <div class="checkboxes" aria-hidden="true">
+                  <label class="checkbox"><input type="checkbox" disabled /> cheese</label>
+                  <label class="checkbox"><input type="checkbox" disabled /> shellfish</label>
+                  <label class="checkbox"><input type="checkbox" disabled /> dairy</label>
+                  <label class="checkbox"><input type="checkbox" disabled /> pineapple</label>
+                </div>
+              </div>
+
+              <div style="margin-top:10px;">
+                <label class="field" for="meal">Select guest 1 inflight meal</label>
+                <select id="meal" disabled>
+                  <option>pizza</option>
+                  <option>pasta</option>
+                  <option>burger</option>
+                </select>
+              </div>
+
+              <div style="margin-top:10px;">
+                <button class="btn ghost" type="button" disabled>Add another guest</button>
+                <span style="margin-left:10px;" class="small-muted">(coming soon)</span>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button class="btn" type="submit" disabled>BOOK HOLIDAY NOW!</button>
+              <button class="btn ghost" type="button" disabled>Save for later</button>
+            </div>
+
+            <div style="margin-top:10px;font-size:12px;color:#5b4b3b;font-weight:700;">
+              Note: booking disabled while Mehrcoins wallet synchronises.
+            </div>
+          </form>
+        </section>
+      </div>
+
+      <aside class="sidebar" aria-label="User profile and balance">
+        <div style="display:flex;gap:10px;align-items:center;">
+          <div class="avatar" role="img" aria-label="User avatar">
+            <!-- simple fallback image to evoke early web avatars -->
+            <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=400&auto=format&fit=crop&ixlib=rb-4.0.3&s=123456" alt="profile" />
+          </div>
+          <div>
+            <div class="username">@AdventurouSteve</div>
+            <div style="font-size:12px;color:#4b382b;font-weight:800;">Member: provisional</div>
+            <a class="bookings-link" href="#" role="button">SHOW MY BOOKINGS</a>
+          </div>
+        </div>
+
+        <div>
+          <div style="font-weight:800;color:#2b1200;">MEHRCOINS BALANCE</div>
+          <div class="coins" role="status" aria-live="polite">
+            <div class="coin-icon">M</div>
+            <div class="coin-number">
+              <div class="num">1,420</div>
+              <div style="font-size:12px;color:#5b4b3b;font-weight:800;">MEHRCOINS</div>
+            </div>
+          </div>
+          <div style="margin-top:8px;font-size:12px;color:#5b4b3b;font-weight:700;">
+            Rate: 100 MEHR = 1 travel-credit
+          </div>
+        </div>
+
+        <div style="margin-top:auto;display:flex;justify-content:space-between;align-items:center;">
+          <div style="font-size:12px;color:#4b382b;font-weight:800;">ID: #MEHR-77</div>
+          <div style="font-size:12px;color:#4b382b;">Secure profile</div>
+        </div>
+      </aside>
+    </div>
+
+    <div class="footer">
+      <div style="font-weight:800;color:#2b1200;">© MEHRDAD'S TRAVEL COMPANY</div>
+      <button class="admin-login" type="button">ADMIN LOGIN</button>
+    </div>
+  </div>
+</body>
+</html>
