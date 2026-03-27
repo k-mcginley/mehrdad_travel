@@ -1,0 +1,416 @@
+ /*
+      Dot-com boom / AOL circa 2001 aesthetic:
+      - bright glossy gradients
+      - beveled/embossed buttons and inputs
+      - heavy borders, drop shadows, and tiled background
+      - monospaced / pixelated headings for "logo" vibe
+      - purely HTML & CSS (no JS)
+    */
+
+    :root{
+      --bg-top: #012a2a;       /* dark teal top */
+      --bg-bottom: #2a0b12;    /* burgundy bottom */
+      --panel:#f7f1e6;         /* cream panels (contrasting retro) */
+      --accent:#ff6b2f;        /* orange accent */
+      --accent2:#ffd24d;       /* yellow accent */
+      --chrome:#cfcfcf;
+      --muted:#444;
+      --dark:#0b1a1a;
+    }
+
+    html,body{
+      height:100%;
+      margin:0;
+      font-family: "Verdana", Arial, sans-serif;
+      background:
+        linear-gradient(180deg, var(--bg-top) 0%, #3b1230 35%, var(--bg-bottom) 100%),
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.02) 0 2px, transparent 2px 6px);
+      color: #0b1a1a;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      padding:18px;
+      box-sizing:border-box;
+    }
+
+    /* page container uses old-school centered table-like width */
+    .wrap{
+      max-width:980px;
+      margin: 0 auto;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0.92));
+      border:6px solid #111;
+      padding:12px;
+      box-shadow: 0 10px 0 rgba(0,0,0,0.6), 0 30px 50px rgba(0,0,0,0.6);
+    }
+
+    /* header with big beveled logo */
+    header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:12px;
+    }
+
+    .logo {
+      display:flex;
+      align-items:center;
+      gap:14px;
+    }
+
+    .logo-box{
+      width:96px;
+      height:96px;
+      background: linear-gradient(145deg, #fff 0%, #ffe8c2 30%, #ffd24d 60%, #ffb24d 100%);
+      border:4px solid #222;
+      box-shadow: inset -6px -6px 0 rgba(0,0,0,0.08), 6px 6px 0 rgba(0,0,0,0.15);
+      border-radius:6px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      transform: rotate(-6deg);
+      position:relative;
+      font-family: "Press Start 2P", monospace;
+      color:#3b0b0b;
+      font-size:28px;
+      letter-spacing:1px;
+    }
+
+    .logo-text{
+      display:flex;
+      flex-direction:column;
+      line-height:1;
+    }
+
+    .logo-text h1{
+      margin:0;
+      font-family: "Press Start 2P", monospace;
+      font-size:20px;
+      color:#1c0b0b;
+      text-transform:uppercase;
+      text-shadow: 1px 1px 0 #fff, 2px 2px 0 rgba(0,0,0,0.12);
+    }
+
+    .logo-text p{
+      margin:2px 0 0 0;
+      font-size:11px;
+      color:#3b2b2b;
+      font-weight:700;
+    }
+
+    /* top-right profile-like small panel */
+    .top-actions{
+      display:flex;
+      gap:8px;
+      align-items:center;
+    }
+
+    .badge{
+      background: linear-gradient(180deg,#ffefbe,#ffd24d);
+      padding:8px 10px;
+      border:2px solid #6b3b00;
+      border-radius:6px;
+      font-weight:700;
+      color:#2b1200;
+      box-shadow: 0 4px 0 rgba(0,0,0,0.25);
+      font-size:12px;
+    }
+
+    /* Layout: left main, right sidebar */
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr 280px;
+      gap:12px;
+    }
+
+    /* search hero with big beveled textbox */
+    .hero{
+      background: linear-gradient(180deg, #fffaf0, #fff1d6);
+      border:4px solid #222;
+      padding:12px;
+      border-radius:6px;
+      box-shadow: 0 12px 0 rgba(0,0,0,0.15);
+    }
+
+    .hero label{
+      display:block;
+      font-weight:700;
+      margin-bottom:8px;
+      font-size:13px;
+      color:#3b2b2b;
+    }
+
+    .search-row{
+      display:flex;
+      gap:10px;
+      align-items:center;
+    }
+
+    .search-input{
+      flex:1;
+      padding:14px 12px;
+      font-size:15px;
+      border-radius:6px;
+      border:3px solid #222;
+      background: linear-gradient(180deg,#fff,#ffe9c6);
+      box-shadow: inset 0 -6px 0 rgba(0,0,0,0.06), 0 6px 0 rgba(0,0,0,0.08);
+      outline:none;
+      color:#111;
+      font-weight:700;
+    }
+
+    .search-input::placeholder{
+      color:#5b3b1b;
+      opacity:0.9;
+      font-weight:700;
+      font-style:normal;
+    }
+
+    .search-cta{
+      padding:12px 14px;
+      background: linear-gradient(180deg, #ff6b2f, #c94121);
+      color:#fff;
+      border:3px solid #4b1b00;
+      border-radius:6px;
+      font-weight:800;
+      box-shadow: 0 8px 0 rgba(0,0,0,0.2);
+      text-transform:uppercase;
+      font-size:13px;
+    }
+
+    /* left card for booking form - clearly retro with table-like layout */
+    .card{
+      background: linear-gradient(180deg,#fffef8,#fff7ea);
+      border:4px solid #222;
+      padding:12px;
+      border-radius:6px;
+      box-shadow: 0 18px 0 rgba(0,0,0,0.15);
+    }
+
+    .card h2{
+      margin:0 0 8px 0;
+      font-size:16px;
+      color:#2b1200;
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:1px;
+    }
+
+    /* form fields are bulky with 3D bevels */
+    form.booking{
+      display:block;
+      margin-top:8px;
+    }
+
+    .form-row{
+      display:flex;
+      gap:8px;
+      margin-bottom:10px;
+      align-items:center;
+    }
+
+    .form-col{
+      flex:1;
+    }
+
+    label.field{
+      display:block;
+      font-size:12px;
+      color:#3b2b2b;
+      font-weight:700;
+      margin-bottom:6px;
+    }
+
+    input[type="text"], input[type="tel"], select{
+      width:100%;
+      padding:10px 8px;
+      border:3px solid #222;
+      border-radius:6px;
+      background: linear-gradient(180deg,#fff,#fffbf0);
+      box-shadow: inset 0 -6px 0 rgba(0,0,0,0.05);
+      font-weight:700;
+      color:#111;
+      font-size:13px;
+    }
+
+    input[disabled], select[disabled], button[disabled]{
+      background: linear-gradient(180deg,#ececec,#ded6c8);
+      color:#7a6f5e;
+      border-color:#9a9483;
+      cursor:not-allowed;
+      box-shadow:none;
+    }
+
+    /* Old-school checkbox / radio look */
+    .checkboxes{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-top:6px;
+    }
+
+    .checkbox{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:6px 8px;
+      border:2px solid #222;
+      background: linear-gradient(180deg,#fff,#f7efe1);
+      border-radius:4px;
+      font-weight:700;
+      font-size:12px;
+      color:#332818;
+    }
+
+    .guest-section{
+      margin-top:8px;
+      padding-top:8px;
+      border-top:3px dashed #b38b5a;
+    }
+
+    /* retro buttons with pronounced 3D */
+    .btn{
+      display:inline-block;
+      padding:10px 14px;
+      border-radius:6px;
+      border:3px solid #222;
+      font-weight:800;
+      text-transform:uppercase;
+      box-shadow: 0 10px 0 rgba(0,0,0,0.18);
+      background: linear-gradient(180deg,#ffd24d,#ff9a3b);
+      color:#2b0b00;
+      font-size:13px;
+      cursor:pointer;
+    }
+
+    .btn.ghost{
+      background: linear-gradient(180deg,#e6eef8,#d6e6ff);
+      color:#10203b;
+    }
+
+    .btn[disabled]{
+      opacity:0.95;
+      cursor:not-allowed;
+      box-shadow:none;
+    }
+
+    .form-actions{
+      margin-top:10px;
+      display:flex;
+      gap:10px;
+      align-items:center;
+    }
+
+    .small-muted{
+      font-size:12px;
+      color:#5b4b3b;
+      font-weight:700;
+    }
+
+    /* right column sidebar with profile and coins */
+    .sidebar{
+      background: linear-gradient(180deg,#fffaf3,#fff2d8);
+      border:4px solid #222;
+      padding:12px;
+      border-radius:6px;
+      box-shadow: 0 18px 0 rgba(0,0,0,0.15);
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      height:fit-content;
+    }
+
+    .avatar{
+      width:84px;
+      height:84px;
+      border:4px solid #222;
+      border-radius:8px;
+      background:linear-gradient(180deg,#fff,#ffd;);
+      overflow:hidden;
+      box-shadow: inset -6px -6px 0 rgba(0,0,0,0.06);
+    }
+
+    .avatar img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+
+    .username{
+      font-weight:800;
+      color:#2b1200;
+      font-size:14px;
+      margin-top:6px;
+      text-transform:uppercase;
+      letter-spacing:0.6px;
+    }
+
+    .bookings-link{
+      display:inline-block;
+      margin-top:8px;
+      padding:8px 10px;
+      background: linear-gradient(180deg,#e6f6ff,#d0eaff);
+      border:3px solid #22405a;
+      color:#072033;
+      font-weight:800;
+      border-radius:6px;
+      text-decoration:none;
+      font-size:12px;
+      box-shadow: 0 8px 0 rgba(0,0,0,0.12);
+      text-transform:uppercase;
+    }
+
+    .coins{
+      margin-top:6px;
+      padding:8px;
+      border:3px solid #222;
+      background: linear-gradient(180deg,#fff9d6,#ffefb0);
+      border-radius:6px;
+      display:flex;
+      gap:10px;
+      align-items:center;
+    }
+
+    .coin-icon{
+      width:56px;height:56px;border-radius:8px;
+      background: linear-gradient(180deg,#ffd24d,#ffb24d);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-family:"Press Start 2P",monospace;
+      font-weight:900;
+      color:#411400;
+      border:3px solid #222;
+      box-shadow: 0 8px 0 rgba(0,0,0,0.2);
+    }
+
+    .coin-number .num{
+      font-weight:900;
+      font-size:18px;
+      color:#2b1200;
+    }
+
+    .footer{
+      margin-top:12px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+    }
+
+    .admin-login{
+      padding:8px 10px;
+      border:3px solid #222;
+      background: linear-gradient(180deg,#f0f0f0,#d9d9d9);
+      font-weight:900;
+      border-radius:6px;
+      box-shadow: 0 8px 0 rgba(0,0,0,0.12);
+      color:#222;
+    }
+
+    /* Slightly retro small-screen adaptation */
+    @media (max-width:880px){
+      .grid{ grid-template-columns: 1fr; }
+      header{ flex-direction:column; align-items:flex-start; gap:8px; }
+    }
