@@ -4,7 +4,7 @@ import sqlite3
 
 class Database:
     def __init__(self):
-        self.__conn = sqlite3.connect("./db/holidays.db")
+        self.__conn = sqlite3.connect("./database/holidays.db")
         self.__cursor = self.__conn.cursor()
     
     def add_new_customer(self, forename: str, surname: str, telephone: str):
