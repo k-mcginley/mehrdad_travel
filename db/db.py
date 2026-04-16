@@ -2,6 +2,7 @@ from typing import Tuple
 from random import randint
 import sqlite3
 
+# test
 
 
 class Database:
@@ -21,6 +22,9 @@ class Database:
         records = self.__cursor.execute("SELECT * FROM Customer").fetchall()
 
         return records
+    
+
+
         
 
 
