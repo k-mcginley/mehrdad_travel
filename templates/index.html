@@ -9,8 +9,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Verdana:wght@400;700&display=swap" rel="stylesheet">
  
   <link href="./static/css/style.css" rel="stylesheet" />
+    
+  <link rel="stylesheet" href="https://pyscript.net/releases/2024.1.3/core.css" />
+    <!-- Core PyScript runtime -->
+    <script type="module" src="https://pyscript.net/releases/2024.1.3/core.js"></script>
 
-  <script defer src="https://pyscript.net/latest/pyscript.js"></script>
 
 </head>
 <body>
@@ -150,5 +153,20 @@
       <button class="admin-login" type="button">ADMIN LOGIN</button>
     </div>
   </div>
+
+  <py-config>
+    [[fetch]]
+    from ="/static/pyscript"
+    files = ["api.py", "domain.py", "ui.py"]
+  </py-config>
+
+  <script type="py" src="static/pyscript/ui.py">
+        
+  </script>
+
 </body>
+
+
+
+
 </html>
