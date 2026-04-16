@@ -14,10 +14,8 @@ class Database:
 
         self.__conn.commit()
 
-
     def get_all_customers(self) -> Tuple[Tuple]:
-
-        records = self.__cursor.execute("SELECT * FROM CUSTOMER").fetchal()
+        records = self.__cursor.execute("SELECT * FROM CUSTOMER").fetchall()
 
         return records
         
