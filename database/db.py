@@ -3,13 +3,14 @@ from typing import Tuple
 import sqlite3
 
 class Database:
-    def __init__(self):
+    def __enter__(self):
         self.__conn = sqlite3.connect("./database/holidays.db")
         self.__cursor = self.__conn.cursor()
+        return self
     
     
-    def close(self):
-        self.__conn.close()
+    def __exit__(self, *args):
+        self.__con.close()
 
 
     def add_new_customer(self, forename: str, surname: str, telephone: str):
@@ -41,7 +42,6 @@ class Database:
         booking_id = "BK"
         self.__cursor.execute(f"INSERT INTO Booking VALUES ('{booking_id}')")
 
-db = Database()
 
 if __name__ == "__main__":
     # tests
