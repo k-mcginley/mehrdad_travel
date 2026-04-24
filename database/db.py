@@ -1,6 +1,7 @@
 import random
 from typing import Tuple
 import sqlite3
+from models import Holiday
 
 class Database:
     def __enter__(self):
@@ -10,7 +11,7 @@ class Database:
     
     
     def __exit__(self, *args):
-        self.__con.close()
+        self.__conn.close()
 
 
     def add_new_customer(self, forename: str, surname: str, telephone: str):
@@ -32,10 +33,10 @@ class Database:
         return records
         
 
-    def get_holidays(self, location: str) -> Tuple[Tuple]:
+    def get_holidays(self, location: str) -> Tuple[Holiday]:
         records = self.__cursor.execute("SELECT * FROM Holiday WHERE Location = ?", (location,)).fetchall()
         
-        return records
+        return [Holiday(*record) for record in records]
 
 
     def book_holidays(self, customer_id):

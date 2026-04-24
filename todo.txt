@@ -1,0 +1,4 @@
+1. install flask - pip install flask
+2. app.py - run a web server that serves index.html
+3. db.py - create a database driver to run SQL queries
+4. api.py - 
