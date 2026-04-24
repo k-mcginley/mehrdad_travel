@@ -26,7 +26,11 @@ def create_booking():
             guest_allergies.append(child.name)
 
     # make dictionary (which contains a Holiday object, Customer object... etc.)
-    
+    booking = {"customer_forename" : cust_forename,
+               "customer_surname" : cust_surname,
+               "cust_tel" : cust_tel,
+               "holiday_id" : None,
+               "guests" : []}
 
 @when()
 async def click_book_holiday(e):
