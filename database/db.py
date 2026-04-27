@@ -47,5 +47,5 @@ class Database:
 if __name__ == "__main__":
     # tests
 
-    print(db.get_holidays("New York"))
+    pass
 

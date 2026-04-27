@@ -1,45 +1,56 @@
-from pyscript import document, when
+from pyscript import document, when, display
 
 from api import get_request_holidays, post_request_booking
 
+from dto import parse_booking, parse_guest
 
 @when("change", "#trip")
 def select_holiday(e):
     form = document.getElementsByClassName("booking")[0]
-    inputs = form.getElementsByTagName("input")
+    inputs = form.querySelectorAll("input, button, select")
+
     for input_ in inputs:
         input_.disabled = False
-    holiday = e.target.innerHTML 
 
 
 def create_booking():
     # get stuff from fields
-    cust_name = document.getElementById("cust-name").value.split(" ")
-    cust_forename = cust_name[0]
-    cust_surname = cust_name[1]
+    cust_name = document.getElementById("cust-name").value
     cust_tel = document.getElementById("cust-tel").value
     guest_name = document.getElementById("guest1").value
+    guest_meal = document.getElementById("meal")
     allergy_boxes = document.getElementsByClassName("checkboxes")[0]
     guest_allergies = []
     for child in allergy_boxes.children:
-        if child.checked:
-            guest_allergies.append(child.name)
+        try:
+            if child.checked:
+                guest_allergies.append(child.name)
+        except AttributeError:
+            pass
 
-    # make dictionary (which contains a Holiday object, Customer object... etc.)
-    booking = {"customer_forename" : cust_forename,
-               "customer_surname" : cust_surname,
-               "cust_tel" : cust_tel,
-               "holiday_id" : None,
-               "guests" : []}
+    holiday_id = document.getElementById("trip").value
 
-@when()
+    # TODO: come back to multiple guests later
+
+    guest = parse_guest(guest_name, guest_allergies, guest_meal)
+
+    guests = [guest]
+
+    booking = parse_booking(cust_name, cust_tel, holiday_id, guests)
+
+    return booking
+
+
+@when("click", "#book_holiday")
 async def click_book_holiday(e):
     '''Triggers request to add new booking to database'''
     booking = create_booking()
     feedback = await post_request_booking(booking)
 
+    display(feedback)
 
-@when()
+
+# @when()
 def click_add_another_guest():
     '''Duplicates customer form for another guest'''
     pass
@@ -69,12 +80,12 @@ def load_holidays_to_select_trip_dropdown(holidays):
         duration = holiday["duration"]
         location = holiday["location"]
         date = holiday["departure_date"]
-        # make text to go in option
-        option_text = f"Go to {location} on {date} for {duration} days"
-        # make option + add text
+        
         option = document.createElement("option")
-        option.innerHTML = option_text
-        # add child to parent tag
+        option.innerHTML = f"Go to {location} on {date} for {duration} days"
+        
+        option.value = holiday["id"]
+
         select_menu.appendChild(option)
 
 

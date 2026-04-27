@@ -90,9 +90,9 @@
               <div style="margin-top:10px;">
                 <label class="field" for="meal">Select guest 1 inflight meal</label>
                 <select id="meal" disabled>
-                  <option>pizza</option>
-                  <option>pasta</option>
-                  <option>burger</option>
+                  <option value="pizza">pizza</option>
+                  <option value="pasta">pasta</option>
+                  <option value="burger">burger</option>
                 </select>
               </div>
 
@@ -103,7 +103,7 @@
             </div>
 
             <div class="form-actions">
-              <button class="btn" type="submit" disabled>BOOK HOLIDAY NOW!</button>
+              <button id="book_holiday" class="btn" type="button" disabled>BOOK HOLIDAY NOW!</button>
               <button class="btn ghost" type="button" disabled>Save for later</button>
             </div>
 
@@ -157,11 +157,8 @@
   <py-config>
     [[fetch]]
     from ="/static/pyscript"
-    files = ["api.py", "domain.py", "ui.py"]
+    files = ["api.py", "domain.py", "ui.py", "dto.py"]
 
-    [[fetch]]
-    from = "/static"
-    files = ["models.py"]
   </py-config>
 
   <script type="py" src="static/pyscript/ui.py">
