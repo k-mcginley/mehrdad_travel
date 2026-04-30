@@ -13,26 +13,21 @@ def select_holiday(e):
         input_.disabled = False
 
 
-def create_booking():
+def create_booking() -> dict:
     # get stuff from fields
     cust_name = document.getElementById("cust-name").value
     cust_tel = document.getElementById("cust-tel").value
     guest_name = document.getElementById("guest1").value
-    guest_meal = document.getElementById("meal")
-    allergy_boxes = document.getElementsByClassName("checkboxes")[0]
-    guest_allergies = []
-    for child in allergy_boxes.children:
-        try:
-            if child.checked:
-                guest_allergies.append(child.name)
-        except AttributeError:
-            pass
+    guest_meal = document.getElementById("meal").value
+    allergies = [allergy.name for allergy in \
+                 document.querySelectorAll('input[type="checkbox"]') \
+                    if allergy.checked]
 
     holiday_id = document.getElementById("trip").value
 
     # TODO: come back to multiple guests later
 
-    guest = parse_guest(guest_name, guest_allergies, guest_meal)
+    guest = parse_guest(guest_name, allergies, guest_meal)
 
     guests = [guest]
 

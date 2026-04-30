@@ -18,6 +18,15 @@ def add_new_booking():
 
     print(new_booking)
 
+    # make models out of the data that was received
+
+
+    # invalid data
+        # return ERROR status code 400
+
+    # valid data
+        # run a database function
+
     return make_response({"status" : "Booking succesful."}, 200)
 
 
@@ -29,7 +38,7 @@ def serve_holidays():
         return make_response(None, 400)
     
     with Database() as db:
-        holidays = db.get_holidays(location)
+        holidays = db.get_holidays_by_location(location)
 
     return make_response(holidays, 200)
 
