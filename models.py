@@ -36,7 +36,7 @@ class Booking:
     id: str
     customer: Customer
     holiday: Holiday
-    num_guests: int
+    guests: list[Guest]=None
 
 @dataclass
 class Allergen:

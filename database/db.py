@@ -29,7 +29,6 @@ class Database:
         self.__cursor.execute(f"DELETE FROM Customer WHERE CustomerID = ?", (id,)).fetchall()
 
 
-
     def get_all_customers(self) -> Tuple[Tuple]:
         records = self.__cursor.execute("SELECT * FROM Customer").fetchall()
 
@@ -48,7 +47,6 @@ class Database:
 
     
     def get_holiday_by_id(self, holiday_id) -> Holiday | None:
-        # TODO
         record = self.__cursor.execute("SELECT * FROM Holiday WHERE HolidayId = ?", (holiday_id,)).fetchone()
         return Holiday(*record)
 
@@ -57,32 +55,64 @@ class Database:
         '''work out new customer's id
         write new customer to database
         return new Customer object'''
+        id = forename[0] + surname[:1] + str(random.randint[0, 999].zfill(3))
+        self.__cursor.execute(f"INSERT INTO Customer VALUES ('{id}', '{forename}', '{surname}', '{telephone}')")
+        return Customer(id, forename, surname, telephone)
 
     
     def get_customer_by_names(self, forename: str, surname: str) -> Customer | None:
         '''look in database to find customer
-        if exists return customer as customer
+        if exists return customer as Customer
         if doesnt return None'''
+        record = self.__cursor.execute(f"SELECT * FROM Customer WHERE Forename = '{forename}' AND Surname = '{surname}'").fetchone()
+        if record:
+            return Customer(*record)
+        return None
 
 
     def get_allergen_by_name(self, allergen_name) -> Allergen | None:
         '''look in database to find an allergen
         if exists return allergen object
         if doesn't return None'''
+        record = self.__cursor.execute(f"SELECT * FROM Allergen WHERE AllergenName = '{allergen_name}'").fetchone()
+        if record:
+            return Allergen(*record)
+        return None
 
 
-    def create_new_guest(self, guest_name: str, allergies: list[Allergen], food: Food) -> Guest:
+    def create_new_guest(self, booking: Booking, guest_name: str, allergies: list[Allergen]) -> Guest:
         '''write new guest to database (primary key will be made automatically)
+        associate new guest with their allergies
         return new guest as Guest'''
+        guest_id = self.__cursor.execute("INSERT INTO Guest VALUES (NULL, ?, ?) RETURNING Guest.GuestID", (booking.id, guest_name)).fetchone()
+        
+        query = ""
+        for allergen in allergies:
+            query += f"INSERT INTO GUEST_ALLERGEN VALUES ('{guest_id}'), '{allergen.id}'"
+        self.__cursor.execute(query)
+
+        return Guest(guest_id, booking, guest_name, allergies)
 
 
-    def create_new_booking(self, customer_id: str, holiday_id: str) -> Booking:
+    def create_new_booking(self, customer: Customer, holiday: Holiday) -> Booking:
         '''write new booking to the database
         return the new booking as a Booking'''
+        booking_id = random.randint(0, 999999).zfill(6)
+        self.__cursor.execute((f"INSERT INTO Booking VALUES ('{booking_id}', '{customer.id}', '{holiday.id}'), NULL"))
+        return Booking(booking_id, customer, holiday, None)
+
+    
+    def create_new_food_choice(self, guest: Guest, food_choice: str):
+        food_id = self.__cursor.execute("INSERT INTO GUEST_FOOD VALUES (NULL, ?, ?) RETURNING GUEST_FOOD.FoodID", (guest.id, food_choice)).fetchone()
+
+        return Food(food_id, guest, food_choice)
 
 
     def get_food_choice_by_name(self, food_choice: str) -> Food:
-        pass
+        record = self.__cursor.execute(f"SELECT * FROM GUEST_FOOD WHERE FoodChoice = '{food_choice}'").fetchone()
+        if record:
+            return Food(*record)
+        return None
 
 
     def process_booking(self, form_data) -> tuple[Customer, Booking, list[Guest]]:
@@ -128,7 +158,7 @@ class Database:
             customer = self.create_new_customer           # if phone num doesnt match then update
 
         
-        booking = self.create_new_booking(customer.id, holiday.id)
+        booking = self.create_new_booking(customer, holiday)
         
         # check if geust data present
         if not guests:
@@ -145,20 +175,38 @@ class Database:
 
             name = guest.get("name")
             meal = guest.get("meal")
-            allergies = guest.get("allergies")
+            allergens: list[str] = guest.get("allergens")
+
+            if not name:
+                raise AttributeError(f"guest name missing from post request data")
 
             if not meal:
                 raise AttributeError(f"guest {name}'s meal missing from post request data")
+            meal = self.get_food_choice_by_name(meal)
+            if not meal:
+                raise DatabaseError(f"meal {meal} does not exist")
 
-            if not allergies:
+            if not allergens:
                 raise AttributeError(f"guest {name}'s allergies missing from post request data")
+            
+            valid_allergens: list[Allergen] = []
+            for allergen in allergens:
+                allergy = self.get_allergen_by_name(allergen)
+                if not allergen:
+                    raise DatabaseError(f"allergen {allergen} does not exist in database")
+                valid_allergens.append(allergen)
+                
+
+            guest = self.create_new_guest(name, allergens)
+            food_choice = self.create_new_food_choice(guest, meal)
+
 
         # make list of guest objects
 
 
     
     
-        return holiday, customer, booking, guests, allergies
+        return booking
 
 
 if __name__ == "__main__":

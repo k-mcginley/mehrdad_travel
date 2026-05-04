@@ -27,6 +27,11 @@ def add_new_booking():
     # valid data
         # run a database function
 
+    try:
+        db.process_booking(new_booking)
+    except Exception as e:
+        return make_response({"error": e}, 500)
+
     return make_response({"status" : "Booking succesful."}, 200)
 
 
