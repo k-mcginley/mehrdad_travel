@@ -1,5 +1,5 @@
 from datetime import date, datetime
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 @dataclass
 class Holiday:
@@ -33,10 +33,10 @@ class Customer:
     
 @dataclass
 class Booking:
-    id: str
-    customer: Customer
-    holiday: Holiday
-    guests: list[Guest]=None
+    id: str=""
+    customer: Customer=None
+    holiday: Holiday=None
+    guests: list[Guest]=field(default_factory=list)
 
 @dataclass
 class Allergen:

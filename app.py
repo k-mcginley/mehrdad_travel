@@ -28,7 +28,8 @@ def add_new_booking():
         # run a database function
 
     try:
-        db.process_booking(new_booking)
+        with Database() as db:
+            confirmed_booking = db.process_booking(new_booking)
     except Exception as e:
         return make_response({"error": e}, 500)
 
